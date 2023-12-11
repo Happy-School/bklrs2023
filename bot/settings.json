@@ -1,0 +1,40 @@
+{
+    "trade_risk": 10,
+    "pairs": {
+        "GBPCHF": {
+        "n_ma": 12,
+        "n_std": 2.5,
+        "maxspread": 0.0004,
+        "mingain": 0.0006,
+        "riskreward": 1.5
+        },
+        "EURCHF": {
+            "n_ma": 12,
+            "n_std": 2.5,
+            "maxspread": 0.0004,
+            "mingain": 0.0006,
+            "riskreward": 1.5
+        },
+        "GBPJPY": {
+            "n_ma": 12,
+            "n_std": 2.5,
+            "maxspread": 0.04,
+            "mingain": 0.06,
+            "riskreward": 1.5
+        },
+        "GBPUSD": {
+            "n_ma": 12,
+            "n_std": 2.5,
+            "maxspread": 0.0004,
+            "mingain": 0.0006,
+            "riskreward": 1.5
+        },
+        "EURGBP": {
+            "n_ma": 12,
+            "n_std": 2.5,
+            "maxspread": 0.0004,
+            "mingain": 0.0006,
+            "riskreward": 1.5
+        }
+    }
+}
