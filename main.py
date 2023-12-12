@@ -5,6 +5,4 @@ from infrastructure.instrument_collection import instrumentCollection
 if __name__ == '__main__':
     api = OpenFxApi()
     n_api = AlphaVantageApi()
-    #instrumentCollection.LoadInstruments()
-    #print(instrumentCollection.instruments_dict)
-    #print(n_api.get_alpha_vantage_data())
+    print(api.get_candles_df(pair_name="EURUSD", count=-32, granularity="M1"))

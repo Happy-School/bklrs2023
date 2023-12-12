@@ -64,6 +64,7 @@ class TradeProcessor:
         return df[log_cols].iloc[-1]
 
     def get_candles(self, pair, row_count, candle_time, granularity, api: OpenFxApi, log_message):
+
         df = api.get_candles_df(pair, count=row_count, granularity=granularity)
 
         if df is None or df.shape[0] == 0:
@@ -77,6 +78,7 @@ class TradeProcessor:
         return df
 
     def calculate_max_candle_rows_to_get(self, trade_settings, additional_rows_to_get):
+    
         max_candle_rows = (trade_settings.n_ma + additional_rows_to_get) * -1
         return max_candle_rows
 

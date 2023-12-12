@@ -1,7 +1,7 @@
 class TradeSettings:
 
     def __init__(self, ob):
-        self.n_ma = ob['n_ma']
+        self.n_ma = int(ob['n_ma']) 
         self.n_std = ob['n_std']
         self.maxspread = ob['maxspread']
         self.mingain = ob['mingain']

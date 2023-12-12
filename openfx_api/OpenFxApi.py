@@ -73,9 +73,9 @@ class OpenFxApi:
         try:
             response = None
             if verb == "get":
-                response = self.session.get(full_url, params=params, data=data, headers=headers, verify=False)
+                response = self.session.get(full_url, params=params, data=data, headers=headers, verify=True)
             if verb == "post":
-                response = self.session.post(full_url, params=params, data=data, headers=headers, verify=False)
+                response = self.session.post(full_url, params=params, data=data, headers=headers, verify=True)
             if verb == "put":
                 response = self.session.put(full_url, params=params, data=data, headers=headers)
             if verb == "delete":

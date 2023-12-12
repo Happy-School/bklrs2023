@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 from multiprocessing import Process
 from flask_socketio import SocketIO
@@ -109,7 +110,10 @@ def read_log_lines_b(log_file_path, last_position):
     return new_lines, last_position
 
 def generate_log():
-    log_file_path = './logs/main.log'
+    # Get the current date
+    current_date = datetime.now().strftime('%Y-%m-%d')
+    # Format the log file name with the current date
+    log_file_path = f'./logs/main_{current_date}.log'
     last_position = 0
 
     while True:

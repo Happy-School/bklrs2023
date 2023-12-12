@@ -16,8 +16,6 @@ class CandleManager:
         for p, t in self.timings.items():
             self.log_message(f"CandleManager() collected most recent candle: {t}", p)
 
-    def log_to_main(self, msg):
-        self.log_message(msg, CandleManager.MAIN_LOG)
 
     def update_timings(self):
 
@@ -33,7 +31,6 @@ class CandleManager:
             if latest > self.timings[pair].last_time:
                 self.timings[pair].is_ready = True
                 self.timings[pair].last_time = latest
-                self.log_to_main(f"CandleManager - {self.timings[pair]}", pair)
                 print(f"CandleManager - {self.timings[pair]}", pair)
                 triggered.append(pair)
         return triggered
