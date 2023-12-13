@@ -273,7 +273,7 @@ class OpenFxApi:
         
     def get_open_trade(self, trade_id):
         url = f"trade/{trade_id}"
-        ok, response = self.make_request(url)
+        ok, response = self.make_request(url,verb='get', data=data, code=200, save_filename="open_trade")
 
         if ok == True and 'Id' in response:
             return OpenTrade(response)
@@ -314,16 +314,16 @@ class OpenFxApi:
         #return None
     
     def get_pip_value(self, instruments_list=None):
-        # Load default instrument list from JSON file
-        with open('data/instruments.json', 'r') as file:
-            default_instruments = json.load(file)
-
-        # Use default instruments list if not provided
-        if instruments_list is None:
+        ic.LoadInstruments()
+        default_instruments = ic.instruments_dict
+        # Use default instruments list if not provided or if it's empty
+        if not instruments_list:
             instruments_list = list(default_instruments.keys())
+            if not instruments_list:
+                print(f"No instruments available to calculate pip value. - {default_instruments}")
+                return None
 
-        url = f"pipsvalue"
-
+        url = "pipsvalue"
         params = {
             'targetCurrency': 'EUR',
             'symbols': ' '.join(instruments_list)
@@ -331,7 +331,8 @@ class OpenFxApi:
 
         ok, response = self.make_request(url, params=params)
 
-        if ok:
-            return {x['Symbol']: x['Value'] for x in response}
+        if ok and response:
+            return {x['Symbol']: x['Value'] for x in response if 'Symbol' in x and 'Value' in x}
 
         return None
+

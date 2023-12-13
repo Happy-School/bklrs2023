@@ -1,9 +1,10 @@
 import time
-from bot.candle_utility import CandleManager
-from bot.trade_analysis import TradeProcessor
+from bot.candle_utility import CandleUtility
+from bot.trade_processor import TradeProcessor
 from bot.trade_execution import place_trade
 from infrastructure.log_wrapper import LogWrapper
 from infrastructure.db.mongoDb import MongoDB
+from infrastructure.instrument_collection import instrumentCollection as ic
 from models.trade_settings import TradeSettings
 from openfx_api.OpenFxApi import OpenFxApi
 import constants.defs as defs
@@ -19,7 +20,7 @@ class TradingBot:
         self.load_pair_settings()
         self.initialize_logging()
         self.api = OpenFxApi()
-        self.candle_manager = CandleManager(self.api, self.trade_configs, self.log_message, TradingBot.TIMEFRAME)
+        self.candle_manager = CandleUtility(self.api, self.trade_configs, self.log_message, TradingBot.TIMEFRAME)
         self.trade_processor = TradeProcessor(self.log_message)
         self.is_running = True
 
@@ -89,6 +90,7 @@ class TradingBot:
         self.log_to_main("Bot shut down")
         
     def run_bot(self):
+        ic.LoadInstruments()
         while self.is_running:
             time.sleep(TradingBot.SLEEP_INTERVAL)
             try:

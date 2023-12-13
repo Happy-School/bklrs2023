@@ -1,0 +1,28 @@
+2023-12-13 20:46:05 LogWrapper initialized: ./logs/error_2023-12-13.log
+2023-12-13 22:14:40 LogWrapper initialized: ./logs/error_2023-12-13.log
+2023-12-13 22:15:07 Trading Bot CRASH: [Errno 2] No such file or directory: 'data/instruments.json'
+2023-12-13 22:16:10 Trading Bot CRASH: [Errno 2] No such file or directory: 'data/instruments.json'
+2023-12-13 22:22:14 LogWrapper initialized: ./logs/error_2023-12-13.log
+2023-12-13 22:23:11 Trading Bot CRASH: [Errno 2] No such file or directory: 'data/instruments.json'
+2023-12-13 22:24:06 Trading Bot CRASH: [Errno 2] No such file or directory: 'data/instruments.json'
+2023-12-13 22:39:09 LogWrapper initialized: ./logs/error_2023-12-13.log
+2023-12-13 22:45:43 LogWrapper initialized: ./logs/error_2023-12-13.log
+2023-12-13 22:47:07 LogWrapper initialized: ./logs/error_2023-12-13.log
+2023-12-13 22:53:12 ERROR placing TradeDecision(): GBPJPY dir:-1 gain:0.0707 sl:180.6201 tp:180.5023
+2023-12-13 22:55:08 ERROR placing TradeDecision(): GBPJPY dir:-1 gain:0.1345 sl:180.5647 tp:180.3405
+2023-12-13 22:56:52 LogWrapper initialized: ./logs/error_2023-12-13.log
+2023-12-13 22:57:43 LogWrapper initialized: ./logs/error_2023-12-13.log
+2023-12-13 23:01:08 ERROR placing TradeDecision(): GBPJPY dir:1 gain:0.1260 sl:180.5280 tp:180.7380
+2023-12-13 23:01:45 LogWrapper initialized: ./logs/error_2023-12-13.log
+2023-12-13 23:03:44 LogWrapper initialized: ./logs/error_2023-12-13.log
+2023-12-13 23:05:08 ERROR placing TradeDecision(): GBPJPY dir:-1 gain:0.1056 sl:180.5024 tp:180.3264
+2023-12-13 23:05:50 LogWrapper initialized: ./logs/error_2023-12-13.log
+2023-12-13 23:06:05 Trading Bot CRASH: tuple indices must be integers or slices, not str
+2023-12-13 23:06:50 LogWrapper initialized: ./logs/error_2023-12-13.log
+2023-12-13 23:08:03 LogWrapper initialized: ./logs/error_2023-12-13.log
+2023-12-13 23:13:04 ERROR placing TradeDecision(): GBPJPY dir:1 gain:0.0600 sl:180.5690 tp:180.6690
+2023-12-13 23:18:19 LogWrapper initialized: ./logs/error_2023-12-13.log
+2023-12-13 23:20:11 ERROR placing TradeDecision(): GBPJPY dir:1 gain:0.0889 sl:180.6283 tp:180.7764
+2023-12-13 23:22:51 LogWrapper initialized: ./logs/error_2023-12-13.log
+2023-12-13 23:28:19 LogWrapper initialized: ./logs/error_2023-12-13.log
+2023-12-13 23:43:07 ERROR placing TradeDecision(): GBPJPY dir:-1 gain:0.0673 sl:180.4578 tp:180.3457

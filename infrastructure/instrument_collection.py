@@ -24,7 +24,6 @@ class InstrumentCollection:
             print("No instrument data")
             return
         
-        
         instruments_dict = {}
         for i in data:
             key = i['Symbol']

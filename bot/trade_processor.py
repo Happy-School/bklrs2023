@@ -52,16 +52,18 @@ class TradeProcessor:
         df = df.reset_index(drop=True)
         df['PAIR'] = pair
         df['SPREAD'] = df.ask_c - df.bid_c
-        df = add_EMA(df, trade_settings.n_ma, column='mid_c')  # Add EMA column
+        df = add_EMA(df, trade_settings.n_ma, column='mid_c')
         df = BollingerBands(df, trade_settings.n_ma, trade_settings.n_std)
         df['GAIN'] = abs(df.mid_c - df.BB_MA)
         df['SIGNAL'] = df.apply(lambda row: self.apply_signal(row, trade_settings), axis=1)
-        #df['SIGNAL'] = df.apply(self.apply_signal, axis=1, trade_settings=trade_settings)
         df[['SL', 'TP']] = df.apply(self.apply_SL_TP, axis=1, result_type='expand', trade_settings=trade_settings)
         df['LOSS'] = abs(df.mid_c - df.SL)
 
-        log_cols = ['PAIR', 'time', 'mid_c', 'mid_o', 'SL', 'TP', 'SPREAD', 'GAIN', 'LOSS', 'SIGNAL']
-        self.log_to_main(f"Processed Candles:\n{df[log_cols].tail()}")
+        log_cols = ['PAIR', 'time', 'SL', 'TP','GAIN', 'LOSS', 'SIGNAL']
+        last_entries = df[log_cols].tail(1)
+        for index, row in last_entries.iterrows():
+            log_message = ",".join(f"{col}: [{row[col]}]" for col in log_cols)
+            self.log_to_main(f"Processed Information - {log_message}")
 
         return df[log_cols].iloc[-1]
 
@@ -69,7 +71,7 @@ class TradeProcessor:
         df = api.get_candles_df(pair, count=row_count, granularity=granularity)
 
         if df is None or df.shape[0] == 0:
-            self.log_to_error(f"Failed to retrieve candle data for {pair} in the trade_analysis. No candles were obtained.")
+            self.log_to_error(f"Failed to retrieve candle data for {pair} in the get_candles No candles were obtained.")
             return None
 
         if df.iloc[-1].time != candle_time:
@@ -84,7 +86,7 @@ class TradeProcessor:
 
     def analyze_trade_decision(self, candle_time, pair, granularity, api, trade_settings, log_message):
         max_candle_rows_to_get = self.calculate_max_candle_rows_to_get(trade_settings, self.ADDROWS)
-        self.log_to_main(f"Analyzing trade decision: max_candle_rows:{max_candle_rows_to_get} candle_time:{candle_time} timeframe:{granularity}, {pair}")
+        self.log_to_main(f"Analyzing trade decision: timeframe:{granularity}, {pair} candle_time:{candle_time} ")
 
         candle_data = self.get_candles(pair, max_candle_rows_to_get, candle_time, granularity, api, log_message)
 
