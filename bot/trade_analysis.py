@@ -3,7 +3,7 @@ pd.set_option('display.max_columns', None)
 pd.set_option('expand_frame_repr', False)
 
 from models.trade_decision import TradeDecision
-from technicals.indicators import BollingerBands
+from technicals.indicators import BollingerBands, add_EMA
 from openfx_api.OpenFxApi import OpenFxApi
 from models.trade_settings import TradeSettings
 import constants.defs as defs
@@ -25,46 +25,47 @@ class TradeProcessor:
         self.log_message(msg, TradeProcessor.ERROR_LOG)
 
     def apply_signal(self, row, trade_settings: TradeSettings):
-        if row.SPREAD <= trade_settings.maxspread and row.GAIN >= trade_settings.mingain:
-            if row.mid_c > row.BB_UP and row.mid_o < row.BB_UP:
-                return defs.SELL
-            elif row.mid_c < row.BB_LW and row.mid_o > row.BB_LW:
+        ema_column = f'EMA_{trade_settings.n_ma}'  
+
+        conditions = (
+            row.SPREAD <= trade_settings.maxspread and 
+            row.GAIN >= trade_settings.mingain
+        )
+
+        if conditions:
+            if row.mid_c > row[ema_column]:
                 return defs.BUY
+            elif row.mid_c < row[ema_column]: 
+                return defs.SELL
+
         return defs.NONE
 
-    def apply_SL(self, row, trade_settings: TradeSettings):
-        if row.SIGNAL == defs.BUY:
-            return row.mid_c - (row.GAIN / trade_settings.riskreward)
-        elif row.SIGNAL == defs.SELL:
-            return row.mid_c + (row.GAIN / trade_settings.riskreward)
-        return 0.0
 
-    def apply_TP(self, row):
+    def apply_SL_TP(self, row, trade_settings: TradeSettings):
         if row.SIGNAL == defs.BUY:
-            return row.mid_c + row.GAIN
+            return row.mid_c - (row.GAIN / trade_settings.riskreward), row.mid_c + row.GAIN
         elif row.SIGNAL == defs.SELL:
-            return row.mid_c - row.GAIN
-        return 0.0
+            return row.mid_c + (row.GAIN / trade_settings.riskreward), row.mid_c - row.GAIN
+        return 0.0, 0.0
 
     def process_candles(self, df: pd.DataFrame, pair, trade_settings: TradeSettings, log_message):
-        df.reset_index(drop=True, inplace=True)
+        df = df.reset_index(drop=True)
         df['PAIR'] = pair
         df['SPREAD'] = df.ask_c - df.bid_c
-
+        df = add_EMA(df, trade_settings.n_ma, column='mid_c')  # Add EMA column
         df = BollingerBands(df, trade_settings.n_ma, trade_settings.n_std)
         df['GAIN'] = abs(df.mid_c - df.BB_MA)
-        df['SIGNAL'] = df.apply(self.apply_signal, axis=1, trade_settings=trade_settings)
-        df['TP'] = df.apply(self.apply_TP, axis=1)
-        df['SL'] = df.apply(self.apply_SL, axis=1, trade_settings=trade_settings)
+        df['SIGNAL'] = df.apply(lambda row: self.apply_signal(row, trade_settings), axis=1)
+        #df['SIGNAL'] = df.apply(self.apply_signal, axis=1, trade_settings=trade_settings)
+        df[['SL', 'TP']] = df.apply(self.apply_SL_TP, axis=1, result_type='expand', trade_settings=trade_settings)
         df['LOSS'] = abs(df.mid_c - df.SL)
 
         log_cols = ['PAIR', 'time', 'mid_c', 'mid_o', 'SL', 'TP', 'SPREAD', 'GAIN', 'LOSS', 'SIGNAL']
-        self.log_to_main(f"Processed Candles:\n{df[log_cols].tail()}, {pair}")
+        self.log_to_main(f"Processed Candles:\n{df[log_cols].tail()}")
 
         return df[log_cols].iloc[-1]
 
     def get_candles(self, pair, row_count, candle_time, granularity, api: OpenFxApi, log_message):
-
         df = api.get_candles_df(pair, count=row_count, granularity=granularity)
 
         if df is None or df.shape[0] == 0:
@@ -78,7 +79,6 @@ class TradeProcessor:
         return df
 
     def calculate_max_candle_rows_to_get(self, trade_settings, additional_rows_to_get):
-    
         max_candle_rows = (trade_settings.n_ma + additional_rows_to_get) * -1
         return max_candle_rows
 

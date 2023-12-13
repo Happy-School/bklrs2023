@@ -1,0 +1,37 @@
+2023-12-13 17:16:04 LogWrapper initialized: ./logs/GBPUSD_2023-12-13.log
+2023-12-13 17:16:04 Setting up trade settings for {'n_ma': 5, 'n_std': 1.5, 'maxspread': 0.0004, 'mingain': 0.0006, 'riskreward': 1.5}
+2023-12-13 17:16:07 CandleManager() collected most recent candle: collected most recent candle: 23-12-13 15:15 Is-ready:False
+2023-12-13 17:16:30 LogWrapper initialized: ./logs/GBPUSD_2023-12-13.log
+2023-12-13 17:16:30 Setting up trade settings for {'n_ma': 5, 'n_std': 1.5, 'maxspread': 0.0004, 'mingain': 0.0006, 'riskreward': 1.5}
+2023-12-13 17:16:34 CandleManager() collected most recent candle: collected most recent candle: 23-12-13 15:15 Is-ready:False
+2023-12-13 17:26:51 LogWrapper initialized: ./logs/GBPUSD_2023-12-13.log
+2023-12-13 17:26:51 LogWrapper initialized: ./logs/GBPUSD_2023-12-13.log
+2023-12-13 17:26:51 Setting up trade settings for {'n_ma': 5, 'n_std': 1.5, 'maxspread': 0.0004, 'mingain': 0.0006, 'riskreward': 1.5}
+2023-12-13 17:26:51 Setting up trade settings for {'n_ma': 5, 'n_std': 1.5, 'maxspread': 0.0004, 'mingain': 0.0006, 'riskreward': 1.5}
+2023-12-13 17:26:54 CandleManager() collected most recent candle: collected most recent candle: 23-12-13 15:25 Is-ready:False
+2023-12-13 17:26:54 CandleManager() collected most recent candle: collected most recent candle: 23-12-13 15:25 Is-ready:False
+2023-12-13 17:33:32 LogWrapper initialized: ./logs/GBPUSD_2023-12-13.log
+2023-12-13 17:33:32 Setting up trade settings for {'n_ma': 5, 'n_std': 1.5, 'maxspread': 0.0004, 'mingain': 0.0006, 'riskreward': 1.5}
+2023-12-13 17:33:35 CandleManager() collected most recent candle: collected most recent candle: 23-12-13 15:32 Is-ready:False
+2023-12-13 17:41:18 LogWrapper initialized: ./logs/GBPUSD_2023-12-13.log
+2023-12-13 17:41:18 Setting up trade settings for {'n_ma': 5, 'n_std': 1.5, 'maxspread': 0.0004, 'mingain': 0.0006, 'riskreward': 1.5}
+2023-12-13 17:41:22 CandleManager() collected most recent candle: collected most recent candle: 23-12-13 15:40 Is-ready:False
+2023-12-13 17:43:19 LogWrapper initialized: ./logs/GBPUSD_2023-12-13.log
+2023-12-13 17:43:19 Setting up trade settings for {'n_ma': 5, 'n_std': 1.5, 'maxspread': 0.0004, 'mingain': 0.0006, 'riskreward': 1.5}
+2023-12-13 17:45:15 LogWrapper initialized: ./logs/GBPUSD_2023-12-13.log
+2023-12-13 17:45:15 Setting up trade settings for {'n_ma': 5, 'n_std': 1.5, 'maxspread': 0.0004, 'mingain': 0.0006, 'riskreward': 1.5}
+2023-12-13 17:49:48 LogWrapper initialized: ./logs/GBPUSD_2023-12-13.log
+2023-12-13 17:49:48 Setting up trade settings for {'n_ma': 5, 'n_std': 1.5, 'maxspread': 0.0004, 'mingain': 0.0006, 'riskreward': 1.5}
+2023-12-13 17:54:17 LogWrapper initialized: ./logs/GBPUSD_2023-12-13.log
+2023-12-13 17:54:17 Setting up trade settings for {'n_ma': 5, 'n_std': 1.5, 'maxspread': 0.0004, 'mingain': 0.0006, 'riskreward': 1.5}
+2023-12-13 19:40:00 LogWrapper initialized: ./logs/GBPUSD_2023-12-13.log
+2023-12-13 19:40:00 Setting up trade settings for {'n_ma': 5, 'n_std': 1.5, 'maxspread': 0.0004, 'mingain': 0.0006, 'riskreward': 1.5}
+2023-12-13 19:40:04 CandleManager() collected most recent candle: collected most recent candle: 23-12-13 17:39 Is-ready:False
+2023-12-13 19:41:07 LogWrapper initialized: ./logs/GBPUSD_2023-12-13.log
+2023-12-13 19:41:07 Setting up trade settings for {'n_ma': 5, 'n_std': 1.5, 'maxspread': 0.0004, 'mingain': 0.0006, 'riskreward': 1.5}
+2023-12-13 19:57:15 LogWrapper initialized: ./logs/GBPUSD_2023-12-13.log
+2023-12-13 19:57:15 Setting up trade settings for {'n_ma': 5, 'n_std': 1.5, 'maxspread': 0.0004, 'mingain': 0.0006, 'riskreward': 1.5}
+2023-12-13 20:00:06 LogWrapper initialized: ./logs/GBPUSD_2023-12-13.log
+2023-12-13 20:00:06 Setting up trade settings for {'n_ma': 5, 'n_std': 1.5, 'maxspread': 0.0004, 'mingain': 0.0006, 'riskreward': 1.5}
+2023-12-13 20:02:44 LogWrapper initialized: ./logs/GBPUSD_2023-12-13.log
+2023-12-13 20:02:44 Setting up trade settings for {'n_ma': 5, 'n_std': 1.5, 'maxspread': 0.0004, 'mingain': 0.0006, 'riskreward': 1.5}

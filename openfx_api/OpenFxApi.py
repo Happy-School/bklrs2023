@@ -123,7 +123,7 @@ class OpenFxApi:
 
     def get_account_summary(self):
         url = f"account"
-        ok, data = self.make_request(url, save_filename="account")
+        ok, data = self.make_request(url, save_filename="")
 
         if ok == True:
             return data
@@ -133,7 +133,7 @@ class OpenFxApi:
         
     def get_account_instruments(self, StatusGroupId='Forex'):
         url = f"symbol"
-        ok, symbol_data = self.make_request(url, save_filename="symbol")
+        ok, symbol_data = self.make_request(url, save_filename="")
 
         if ok == False:
             print("ERROR get_account_instruments()", symbol_data)
@@ -142,7 +142,7 @@ class OpenFxApi:
         target_inst = [x for x in symbol_data if x['StatusGroupId']==StatusGroupId and len(x['Symbol'])==6]
         
         url = f"quotehistory/symbols"
-        ok, his_symbol_data = self.make_request(url, save_filename="quotehistory_symbols")
+        ok, his_symbol_data = self.make_request(url, save_filename="")
 
         final_instruments = [x for x in target_inst if x['Symbol'] in his_symbol_data]
 
@@ -173,8 +173,8 @@ class OpenFxApi:
 
         base_url = f"quotehistory/{pair_name}/{granularity}/bars/"
 
-        ok_bid, bid_data = self.make_request(base_url+"bid", params=params, save_filename="bids")
-        ok_ask, ask_data = self.make_request(base_url+"ask", params=params, save_filename="asks")
+        ok_bid, bid_data = self.make_request(base_url+"bid", params=params, save_filename="")
+        ok_ask, ask_data = self.make_request(base_url+"ask", params=params, save_filename="")
 
         if ok_ask == True and ok_bid == True:
             return True, [ask_data, bid_data]
@@ -259,7 +259,7 @@ class OpenFxApi:
             data['TakeProfit'] = round(take_profit, instrument.displayPrecision)
             
 
-        response = self.make_request(url, verb="post", data=data, code=200)
+        response = self.make_request(url, verb="post", data=data, code=200, save_filename='order')
 
         if 'RemainingAmount' in response and response['RemainingAmount'] != 0:
             ot = self.get_open_trade(response['Id'])

@@ -40,14 +40,24 @@ class TradingBot:
         
         self.mongo.close_connection()
 
-    def initialize_logging(self):
+    def initialize_logging(self, add_logs_for_pairs=True):
         self.logs = {}
-        for k in self.trade_configs.keys():
-            self.logs[k] = LogWrapper(k)
-            self.log_message(f"Setting up trade settings for {self.trade_configs[k]}", k)
-        self.logs[TradingBot.ERROR_LOGGER] = LogWrapper(TradingBot.ERROR_LOGGER)
-        self.logs[TradingBot.MAIN_LOGGER] = LogWrapper(TradingBot.MAIN_LOGGER)
-        self.log_to_main(f"Trading Bot initiated with {TradeSettings.settings_to_str(self.trade_configs)}")
+        
+        def add_log_for_pair(pair_name, trade_config):
+            self.logs[pair_name] = LogWrapper(pair_name)
+            self.log_message(f"Setting up trade settings for {trade_config}", pair_name)
+
+        if add_logs_for_pairs:
+            for pair_name, trade_config in self.trade_configs.items():
+                add_log_for_pair(pair_name, trade_config)
+        
+        self.add_default_loggers()
+
+    def add_default_loggers(self):
+        for log_name in [TradingBot.ERROR_LOGGER, TradingBot.MAIN_LOGGER]:
+            self.logs[log_name] = LogWrapper(log_name)
+        self.log_to_main(f"Trading Bot initialized with settings: {TradeSettings.settings_to_str(self.trade_configs)}")
+
 
     def log_message(self, msg, key):
         self.logs[key].logger.debug(msg)

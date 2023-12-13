@@ -9,6 +9,10 @@ def BollingerBands(df: pd.DataFrame, n=20, s=2):
     return df
 
 
+def add_EMA(df: pd.DataFrame, n=20, column='mid_c'):
+    ema_column_name = f'EMA_{n}'
+    df[ema_column_name] = df[column].ewm(span=n, adjust=False).mean()
+    return df
 
 
 

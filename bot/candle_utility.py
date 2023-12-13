@@ -23,6 +23,10 @@ class CandleManager:
 
         for pair in self.pairs_list:
             latest = self.api.last_complete_candle(pair, self.granularity)
+            print(latest)
+            if latest is None:
+                self.log_message(f"CandleManager: Unable to get candle for {pair}. Retrying...")
+                return self.update_timings()  # Recursive call
             print(f"CandleManager {pair} current:{latest} last:{self.timings[pair].last_time}")
             if latest is None:
                 self.log_message(f"CandleManager: Unable to get candle for {pair}")
