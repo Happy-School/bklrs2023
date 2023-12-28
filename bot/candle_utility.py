@@ -26,10 +26,6 @@ class CandleUtility:
             if latest is None:
                 self.log_message(f"CandleUtility: Unable to get candle for {pair}. Retrying...")
                 return self.update_timings()  # Recursive call
-            print(f"CandleUtility {pair} current:{latest} last:{self.timings[pair].last_time}")
-            if latest is None:
-                self.log_message(f"CandleUtility: Unable to get candle for {pair}")
-                continue
             self.timings[pair].is_ready = False
             if latest > self.timings[pair].last_time:
                 self.timings[pair].is_ready = True

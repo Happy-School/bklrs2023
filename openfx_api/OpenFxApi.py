@@ -273,7 +273,7 @@ class OpenFxApi:
         
     def get_open_trade(self, trade_id):
         url = f"trade/{trade_id}"
-        ok, response = self.make_request(url,verb='get', data=data, code=200, save_filename="open_trade")
+        ok, response = self.make_request(url,verb='get', save_filename="open_trade")
 
         if ok == True and 'Id' in response:
             return OpenTrade(response)
@@ -316,7 +316,7 @@ class OpenFxApi:
     def get_pip_value(self, instruments_list=None):
         ic.LoadInstruments()
         default_instruments = ic.instruments_dict
-        # Use default instruments list if not provided or if it's empty
+
         if not instruments_list:
             instruments_list = list(default_instruments.keys())
             if not instruments_list:

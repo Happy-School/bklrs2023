@@ -31,8 +31,8 @@ def place_trade(trade_decision: TradeDecision, api: OpenFxApi, log_message, log_
         trade_decision.sl,
         trade_decision.tp
     )
-    print(trade_id)
-    if trade_id is None:
+    
+    if trade_id is None: # Needs changes
         log_error(f"ERROR placing {trade_decision}")
         log_message(f"ERROR placing {trade_decision}", trade_decision.pair)
     else:

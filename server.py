@@ -1,6 +1,8 @@
 from datetime import datetime
 import json
 from multiprocessing import Process
+import os
+import time
 from flask_socketio import SocketIO
 from flask import Flask, jsonify, request, session
 from flask_bcrypt import Bcrypt
@@ -95,7 +97,7 @@ class UserAuthentication:
 def run_bot():
     t_bot = TradingBot()
     t_bot.turn_on_bot()
-    t_bot.run_bot()
+
 
 bot_process = None
 
@@ -110,19 +112,21 @@ def read_log_lines_b(log_file_path, last_position):
     return new_lines, last_position
 
 def generate_log():
-    # Get the current date
     current_date = datetime.now().strftime('%Y-%m-%d')
-    # Format the log file name with the current date
     log_file_path = f'./logs/main_{current_date}.log'
     last_position = 0
 
     while True:
+        if not os.path.exists(log_file_path):
+            time.sleep(1)
+            continue
+
         new_lines, last_position = read_log_lines_b(log_file_path, last_position)
-        
 
         for line in new_lines:
             data = json.dumps(line.strip())
             socketio.emit('log', data, namespace='/logs')
+
 
 app = Flask(__name__)
 app.config.from_object(ApplicationConfig)
